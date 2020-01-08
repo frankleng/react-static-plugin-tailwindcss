@@ -94,3 +94,11 @@ export default {
   ]
 };
 ```
+
+Create a purgecss.config.js file
+```js
+module.exports = {
+    content: ['./**/*.html'],
+    css: ['./src/app.css']
+}
+```
