@@ -80,3 +80,17 @@ export default {
   ]
 };
 ```
+
+### PurgeCSS
+
+If you want to remove unused Tailwind CSS, enable https://github.com/FullHuman/postcss-purgecss plugin
+
+```js
+export default {
+  plugins: [
+    ["react-static-plugin-tailwindcss", {
+      purgeCSS: true
+    }]
+  ]
+};
+```

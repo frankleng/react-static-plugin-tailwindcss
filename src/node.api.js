@@ -10,6 +10,7 @@ const getOneOf = ({ oneOf } = {}) => {
 
 const defaultOptions = {
   autoPrefixer: true,
+  purgeCss: false,
   cssInJs: false
 }
 
@@ -33,6 +34,10 @@ export default (options = {}) => ({
 
         if (opts.autoPrefixer) {
           tailwind.push(require('autoprefixer'))
+        }
+
+        if (opts.purgeCss) {
+          tailwind.push(require('@fullhuman/postcss-purgecss'))
         }
 
         Object.assign(postcssLoader.options, {
