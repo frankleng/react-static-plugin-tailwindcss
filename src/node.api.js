@@ -11,11 +11,11 @@ const getOneOf = ({ oneOf } = {}) => {
 const defaultOptions = {
   autoPrefixer: true,
   purgeCss: false,
-  cssInJs: false
-}
+  cssInJs: false,
+};
 
 export default (options = {}) => ({
-  webpack: config => {
+  webpack: (config) => {
     const opts = { ...defaultOptions, ...options };
     const { rules } = config.module;
     const { oneOf } = rules.find(getOneOf);
@@ -30,20 +30,20 @@ export default (options = {}) => ({
         postcssLoader.options.plugins
       ) {
         const plugins = postcssLoader.options.plugins;
-        const tailwind = [require("tailwindcss")]
+        const tailwind = [require("tailwindcss")];
 
         if (opts.autoPrefixer) {
-          tailwind.push(require('autoprefixer'))
+          tailwind.push(require("autoprefixer"));
         }
 
         if (opts.purgeCss) {
-          tailwind.push(require('@fullhuman/postcss-purgecss'))
+          tailwind.push(
+            require("@fullhuman/postcss-purgecss")(opts.purgeCssOptions || {})
+          );
         }
 
         Object.assign(postcssLoader.options, {
-          plugins: [
-            ...tailwind, ...(plugins.length ? plugins : [])
-          ]
+          plugins: [...tailwind, ...(plugins.length ? plugins : [])],
         });
 
         break;
@@ -52,10 +52,10 @@ export default (options = {}) => ({
 
     if (opts.cssInJs) {
       config.node = {
-        fs: 'empty'
-      }
+        fs: "empty",
+      };
     }
 
     return config;
-  }
+  },
 });
